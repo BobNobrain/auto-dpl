@@ -150,3 +150,14 @@ table.bd_list td
     margin-bottom: 1em;
     text-align: center;
 }
+
+.modal-create {
+    display: flex;
+    flex-flow: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+.modal-create p {
+    margin-top: 1em;
+    margin-bottom: 0;
+}

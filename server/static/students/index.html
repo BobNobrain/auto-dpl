@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="../lib/bootstrap.min.css">
     <link rel="stylesheet" href="../lib/common.css">
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Студенты</title>
     <script src="../lib/common.js"></script>
     <script src="index.js"></script>
@@ -52,6 +53,7 @@
                 <th>СНИЛС</th>
                 <th>Пол</th>
                 <th>Группа</th>
+                <th></th>
             </tr>
             </thead>
             <tbody id="data_tbody">
@@ -61,35 +63,37 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body modal-create">
-                <p>Фамилия:</p><input type="text" required placeholder="Иванов" id="surname">
-                <p>Имя:</p><input type="text" required placeholder="Иван" id="name">
-                <p>Отчество:</p><input type="text" required placeholder="Иванович" id="third_name">
-                <p>Дата рождения:</p><input type="date" required placeholder="01.01.1901" id="birthday">
-                <p>Паспорт:</p><input type="text" required placeholder="1234567890" id="passport_number">
-                <p>СНИЛС:</p><input type="text" required placeholder="123456789012" id="snils">
-                <p>Пол:</p>
-                <select id="sex">
-                    <option value="М">Муж.</option>
-                    <option value="Ж">Жен.</option>
-                </select>
-                <p>Группа:</p>
-                <select id="group_id">
-                    <option value="0">(не выбрано...)</option>
-                </select>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+<div>
+    <div class="modal fade show" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавить запись</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body modal-create">
+                    <p>Фамилия:</p><input type="text" required placeholder="Иванов" id="surname">
+                    <p>Имя:</p><input type="text" required placeholder="Иван" id="name">
+                    <p>Отчество:</p><input type="text" placeholder="Иванович" id="third_name">
+                    <p>Дата рождения:</p><input type="date" required placeholder="01.01.1901" id="birthday">
+                    <p>Паспорт:</p><input type="text" required placeholder="1234567890" id="passport_number">
+                    <p>СНИЛС:</p><input type="text" required placeholder="123456789012" id="snils">
+                    <p>Пол:</p>
+                    <select id="sex">
+                        <option value="М">Муж.</option>
+                        <option value="Ж">Жен.</option>
+                    </select>
+                    <p>Группа:</p>
+                    <select id="group_id">
+                        <option value="0">(не выбрано...)</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="button" class="btn btn-primary" id="submit_btn">Добавить</button>
+                </div>
             </div>
         </div>
     </div>
