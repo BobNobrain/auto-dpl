@@ -156,8 +156,8 @@ Row.prototype.render = function ()
 		values.push(v);
 	}
 
-	values.push('<button type="button" class="btn btn-primary" onclick="startEditing(this);">Редактировать</button>');
-	values.push('<button type="button" class="btn btn-danger" onclick="deleteRecord(this);">Удалить</button>');
+	values.push('<button type="button" class="btn btn-primary" onclick="startEditing(this);">Редактировать</button>' +
+		'<button type="button" class="btn btn-danger" onclick="deleteRecord(this);">Удалить</button>');
 
 	return dom(
 		'tr', { 'data-id': this.data[window.schema[0]] },
