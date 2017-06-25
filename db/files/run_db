@@ -11,7 +11,7 @@ set -x
 
 # /usr/sbin/mysqld_safe --user root
 # service mysqld start
-/usr/sbin/mysqld --user root &
+/usr/sbin/mysqld --character-set-server=utf8 --collation-server=utf8_general_ci --user root &
 mysql_pid=$!
 
 sleep 2

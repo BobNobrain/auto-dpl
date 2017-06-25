@@ -1,5 +1,5 @@
 SET NAMES 'utf8';
-SET CHARACTER SET utf8;
+SET CHARACTER SET 'utf8';
 
 CREATE DATABASE test;
 USE test;
@@ -10,7 +10,9 @@ CREATE TABLE testtab (
 	PRIMARY KEY (id)
 ) COMMENT='this is my test table';
 
-CREATE DATABASE prod;
+CREATE DATABASE prod
+	DEFAULT CHARACTER SET utf8
+	DEFAULT COLLATE utf8_general_ci;
 USE prod;
 
 CREATE TABLE students (
@@ -42,7 +44,7 @@ CREATE TABLE groups (
 
 CREATE TABLE cars (
 	car_id INTEGER NOT NULL AUTO_INCREMENT,
-	car_number CHAR(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+	car_number CHAR(6) NOT NULL,
 	region VARCHAR(3) NOT NULL,
 	produced_at DATE NOT NULL,
 	model VARCHAR(30) NOT NULL,

@@ -1,5 +1,5 @@
-SET NAMES 'utf8';
-SET CHARACTER SET utf8;
+﻿SET NAMES 'utf8';
+SET CHARACTER SET 'utf8';
 
 USE test;
 INSERT INTO testtab VALUES(0, "Bob");

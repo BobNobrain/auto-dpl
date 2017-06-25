@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/common.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Студенты</title>
+    <script src="../lib/common.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<header>
+    <div id="head"></div>
+    <div id="head_box">
+        <div id="menu_box" class="center">
+            <div id="menu_left">
+                <ul class="hr">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/students">Ученики</a></li>
+                    <li><a href="/teachers">Преподаватели</a></li>
+                </ul>
+            </div>
+            <div id="menu_right">
+                <ul class="hr">
+                    <li><a href="/car_park">Автопарк</a></li>
+                    <li><a href="/report">Отчёты</a></li>
+                    <li><a href="/contacts">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="line"></div>
+        <div id="head_logo"><a href="/"><img src="../img/logo.png" width="170px" style="margin-left: -85px;"></a></div>
+    </div>
+</header>
+<div id="content">
+    <div id="main_text_block">
+        <h1>Студенты</h1>
+
+        <div class="add-btn-container">
+            <button type="button" class="btn btn-primary" id="add_btn">Добавить</button>
+        </div>
+
+        <table class="table table-stripped">
+            <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Отчество</th>
+                <th>Дата рождения</th>
+                <th>Паспорт</th>
+                <th>СНИЛС</th>
+                <th>Пол</th>
+                <th>Группа</th>
+            </tr>
+            </thead>
+            <tbody id="data_tbody">
+            <tr><td colspan="8" style="text-align: center;">Загрузка данных...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modal_add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-create">
+                <p>Фамилия:</p><input type="text" required placeholder="Иванов" id="surname">
+                <p>Имя:</p><input type="text" required placeholder="Иван" id="name">
+                <p>Отчество:</p><input type="text" required placeholder="Иванович" id="third_name">
+                <p>Дата рождения:</p><input type="date" required placeholder="01.01.1901" id="birthday">
+                <p>Паспорт:</p><input type="text" required placeholder="1234567890" id="passport_number">
+                <p>СНИЛС:</p><input type="text" required placeholder="123456789012" id="snils">
+                <p>Пол:</p>
+                <select id="sex">
+                    <option value="М">Муж.</option>
+                    <option value="Ж">Жен.</option>
+                </select>
+                <p>Группа:</p>
+                <select id="group_id">
+                    <option value="0">(не выбрано...)</option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../lib/date.js"></script>
+<script src="../lib/jquery-3.1.1.slim.min.js"></script>
+<script src="../lib/tether.min.js"></script>
+<script src="../lib/bootstrap.min.js"></script>
+</body>
+</html>

@@ -27,9 +27,9 @@ done
 mysql -u root -e "CREATE USER root@'%' IDENTIFIED BY ''; GRANT ALL ON *.* TO root@'%'; FLUSH PRIVILEGES;"
 
 # create the default database from the ADDed file.
-mysql < /tmp/deploy.sql
-mysql < /tmp/fake_data.sql
-mysql < /tmp/users.sql
+mysql --default-character-set=utf8 < /tmp/deploy.sql
+mysql --default-character-set=utf8 < /tmp/fake_data.sql
+mysql --default-character-set=utf8 < /tmp/users.sql
 
 # Tell the MySQL daemon to shutdown.
 mysqladmin shutdown
