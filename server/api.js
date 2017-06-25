@@ -75,12 +75,12 @@ const makeInsertPlaceholders = schema => new Array(schema.length).join('?, ') + 
 const makeUpdates = (schema, dict) =>
 {
 	return schema
-		.map(column =>
+		.reduce((acc, column) =>
 		{
 			if (dict.hasOwnProperty(column))
-				return `${column} = ?`;
-			else return '';
-		})
+				acc.push(`${column} = ?`);
+			return acc;
+		}, [])
 		.join(', ')
 	;
 };
@@ -112,13 +112,28 @@ const connectAndQuery = (queryString, values) =>
 	;
 };
 
-const makeCRUD = (table, schema, idIndex = 0) =>
+const makeCRUD = (table, schema, {idIndex = 0, joins = []} = {}) =>
 {
 	const idName = schema[idIndex]; // name of primary key column
 	return {
 		'get': (id) =>
 		{
-			return connectAndQuery(`SELECT * FROM ${table} WHERE ${idName} = ? LIMIT 1`, [id])
+			let q = '';
+			if (joins.length)
+			{
+				let conds = joins.map(j => `${table}.${j.idName} = ${j.table}.${j.idName}`);
+				let filters = joins.map(j =>
+					j.filters.map(f => `${j.table}.${f}`).join(', ')
+				);
+				q = `SELECT ${table}.*, ${filters.join(', ')} 
+					FROM ${table}, ${joins.map(j => j.table).join(', ')}
+					WHERE ${idName} = ? AND ${conds.join(' AND ')} LIMIT 1`;
+			}
+			else
+			{
+				q = `SELECT * FROM ${table} WHERE ${idName} = ? LIMIT 1`;
+			}
+			return connectAndQuery(q, [id])
 				.then(r =>
 				{
 					if (r.length) return r[0];
@@ -128,7 +143,22 @@ const makeCRUD = (table, schema, idIndex = 0) =>
 		},
 		'list': () =>
 		{
-			return connectAndQuery(`SELECT * FROM ${table}`)
+			let q = '';
+			if (joins.length)
+			{
+				let conds = joins.map(j => `${table}.${j.idName} = ${j.table}.${j.idName}`);
+				let filters = joins.map(j =>
+					j.filters.map(f => `${j.table}.${f}`).join(', ')
+				);
+				q = `SELECT ${table}.*, ${filters.join(', ')} 
+					FROM ${table}, ${joins.map(j => j.table).join(', ')}
+					WHERE ${conds.join(' AND ')}`;
+			}
+			else
+			{
+				q = `SELECT * FROM ${table}`;
+			}
+			return connectAndQuery(q)
 				.then(r => [...r])
 			;
 		},
@@ -187,8 +217,12 @@ module.exports = {
 		'group_id group_number begin_date end_date'.split(' ')),
 
 	[config.api.student]: makeCRUD('students',
-		'student_id surname name third_name birthday passport_number snils sex group_id'.split(' ')),
+		'student_id surname name third_name birthday passport_number snils sex group_id'.split(' '),
+		{ joins: [{ table: 'groups', idName: 'group_id', filters: ['group_number'] }] }
+	),
 
 	[config.api.teacher]: makeCRUD('teachers',
-		'teacher_id surname name third_name birthday teacher_role experience car_id'.split(' '))
+		'teacher_id surname name third_name birthday teacher_role experience car_id'.split(' '),
+		{ joins: [{ table: 'cars', idName: 'car_id', filters: ['model', 'car_number', 'region'] }] }
+	)
 };
